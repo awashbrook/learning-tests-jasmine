@@ -1,0 +1,32 @@
+{
+    "name": "viewjson",
+    "version": "0.0.1",
+    "description": "JSON to HTML renderer",
+    "author": {
+        "name": "Vasya Aksyonov",
+        "email": "outring@gmail.com"
+    },
+    "main": "index",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/outring/viewjson.git"
+    },
+    "keywords": [
+        "json",
+        "html",
+        "template",
+        "express"
+    ],
+    "dependencies": {
+        "lodash": "^2.4.1"
+    },
+    "devDependencies": {
+        "jasmine-node": "^1.14.5"
+    },
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "scripts": {
+        "test": "./node_modules/.bin/jasmine-node test/"
+    }
+}
