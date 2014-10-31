@@ -1,4 +1,5 @@
 var _ = require("lodash");
+var sandboxedModule = require("sandboxed-module");
 
 function toObject(items) {
     var result = {};
@@ -102,6 +103,8 @@ function renderTemplate(template, options) {
     return render(template, {}, options);
 }
 
+var expressCache = {};
+
 module.exports = {
     render: renderTemplate,
 
@@ -109,7 +112,17 @@ module.exports = {
         options = _.extend({}, options);
         return function (templatePath, data, callback) {
             try {
-                var template = require(templatePath);
+                var template;
+                var cacheEnabled = data.settings && data.settings["view cache"];
+                if (cacheEnabled && templatePath in expressCache) {
+                    template = expressCache[templatePath];
+                }
+                else {
+                    template = sandboxedModule.require(templatePath);
+                    if (cacheEnabled) {
+                        expressCache[templatePath] = template;
+                    }
+                }
                 var compiledTemplate = template(data);
                 callback(null, renderTemplate(compiledTemplate, options));
             }
