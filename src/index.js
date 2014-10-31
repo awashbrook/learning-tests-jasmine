@@ -1,5 +1,5 @@
 var _ = require("lodash");
-var sandboxedModule = require("sandboxed-module");
+var requireLike = require("require-like");
 
 function toObject(items) {
     var result = {};
@@ -103,6 +103,7 @@ function renderTemplate(template, options) {
     return render(template, {}, options);
 }
 
+var expressRequire = requireLike(__filename, true);
 var expressCache = {};
 
 module.exports = {
@@ -118,7 +119,7 @@ module.exports = {
                     template = expressCache[templatePath];
                 }
                 else {
-                    template = sandboxedModule.require(templatePath);
+                    template = expressRequire(templatePath);
                     if (cacheEnabled) {
                         expressCache[templatePath] = template;
                     }

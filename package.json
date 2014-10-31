@@ -1,6 +1,6 @@
 {
     "name": "viewjson",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "JSON to HTML renderer",
     "author": {
         "name": "Vasya Aksyonov",
@@ -20,7 +20,7 @@
     "dependencies": {
         "jasmine": "^2.0.1",
         "lodash": "^2.4.1",
-        "sandboxed-module": "^1.0.2"
+        "require-like": "^0.1.2"
     },
     "devDependencies": {
         "jasmine-node": "^1.14.5"
