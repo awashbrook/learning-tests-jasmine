@@ -40,20 +40,7 @@
     "xit": false,
     "expect": false,
     "inject": false,
-    "spyOn": false,
-    // angular globals
-    "angular": false,
-    "when": false, // $httpBackend
-    // browser globals
-    "jQuery": false,
-    "$": false,
-    "_": false,
-    "moment": false,
-    "google": false,
-    "d3": false,
-    "MG": false,
-    "Rickshaw": false,
-    "Gauge": false
+    "spyOn": false
   },
 //    "indent": 4,            // Specify indentation spacing
   "devel": true             // Allow development statements e.g. `console.log();`.

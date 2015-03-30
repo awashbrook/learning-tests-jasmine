@@ -1,4 +1,6 @@
 'use strict';
+var _ = require('lodash');
+
 describe("tests to learn jasmine, javascript, em6, lodash", function () {
   // TODO upgrade Jasmine 1.3.1 > 2.1.3 and integrate custom matcher properly
   //beforeEach(function () {
@@ -19,7 +21,7 @@ describe("tests to learn jasmine, javascript, em6, lodash", function () {
   it("should cover sample tests for Object.is", function () {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
     expect(Object.is('foo', 'foo')).toBeTruthy();     // true
-    expect(Object.is(window, window)).toBeTruthy();   // true
+    //expect(Object.is(window, window)).toBeTruthy();   // true // browser only
     expect(Object.is('foo', 'bar')).toBeFalsy();     // false
     expect(Object.is([], [])).toBeFalsy();           // false
     var test = { a: 1 };
@@ -31,7 +33,7 @@ describe("tests to learn jasmine, javascript, em6, lodash", function () {
     expect(Object.is(NaN, 0/0)).toBeTruthy();         // true
     expect(Object.is(NaN, NaN)).toBeTruthy();         // true
   });
-  it('should provide sanity test comparing objects in general', inject(function () {
+  it('should provide sanity test comparing objects in general', function () {
     expect(JSON.stringify(({
       from: 'then',
       to: 'now'
@@ -60,5 +62,5 @@ describe("tests to learn jasmine, javascript, em6, lodash", function () {
     //  to: 'now',
     //  from: 'then'
     //});
-  }));
+  });
 });

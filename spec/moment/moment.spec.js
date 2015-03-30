@@ -1,4 +1,5 @@
 'use strict';
+var moment = require('moment');
 
 describe("tests to learn moment.js", function () {
   it("should show how we validate a moment", function () {
@@ -57,7 +58,7 @@ describe("tests to learn moment.js", function () {
     expect(moment.isDuration(moment.duration(3, "days"))).toBeTruthy();
     expect(moment.isDuration(moment.utc())).toBeFalsy();
   });
-  it('should prove miscellaneous assumptions around moment.js', inject(function () {
+  it('should prove miscellaneous assumptions around moment.js', function () {
     expect("a day ago").toEqual(moment.duration(-1, "days").humanize(true)); // Our default interval :)
     expect(moment.duration(-3, "days")).toEqual(moment.duration(-3, "d"));
     expect(moment.duration(-2, "days")).toEqual(moment.duration(-2, "d"));
@@ -72,5 +73,5 @@ describe("tests to learn moment.js", function () {
     expect(JSON.stringify(moment.duration(5, 'm'))).toEqual(JSON.stringify("PT5M")); // moment.duration.toJSON() only works with moment.js 2.9.0+
     expect(JSON.stringify(moment.utc(moment.utc("1424196910165")))).toEqual(JSON.stringify(moment.utc("1424196910165"))); // are moments idempotent
     expect(JSON.stringify(moment.duration(moment.duration(3, "days")))).toEqual(JSON.stringify(moment.duration(3, "days"))); // are durations idempotent
-  }));
+  });
 });
