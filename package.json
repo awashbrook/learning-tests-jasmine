@@ -1,34 +1,14 @@
 {
-    "name": "viewjson",
-    "version": "0.0.4",
-    "description": "JSON to HTML renderer",
-    "author": {
-        "name": "Vasya Aksyonov",
-        "email": "outring@gmail.com"
-    },
-    "main": "index",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/outring/viewjson.git"
-    },
-    "keywords": [
-        "json",
-        "html",
-        "template",
-        "express"
-    ],
-    "dependencies": {
-        "jasmine": "^2.0.1",
-        "lodash": "^2.4.1",
-        "require-like": "^0.1.2"
-    },
-    "devDependencies": {
-        "jasmine-node": "^1.14.5"
-    },
-    "engines": {
-        "node": ">= 0.10.0"
-    },
-    "scripts": {
-        "test": "./node_modules/.bin/jasmine-node tests/"
-    }
+  "description": "Tests to learn various APIs like jasmine, javascript, em6, lodash, moment.js, etc.",
+  "dependencies": {
+    "moment": "~2.9.0",
+    "lodash": "~3.1"
+  },
+  "devDependencies": {
+    "jasmine": "^2.1.1",
+    "jshint": "^2.6.0"
+  },
+  "scripts": {
+    "test": "jshint src spec && ./node_modules/jasmine/bin/jasmine.js"
+  }
 }
