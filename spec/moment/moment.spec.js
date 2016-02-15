@@ -67,11 +67,38 @@ describe("tests to learn moment.js", function () {
     expect(moment.duration(3, "days")).toEqual(moment.duration(3, "d"));
     expect(parseInt("3m")).toEqual(3); // This is to generous for us :)
     expect(parseInt("-3days")).toEqual(-3); // This is to generous for us :)
+
+    expect(moment.utc(1424283310165).unix()).toEqual(1424283310); // unix is seconds from epoch, not millis
+    expect(moment.utc(1424196910165).toISOString()).toEqual("2015-02-17T18:15:10.165Z");
+    expect(moment.duration(5, "m").toISOString()).toEqual("PT5M");
     expect(moment.utc(1424283310165).add(moment.duration(-1, "days")).isSame(moment.utc(1424196910165))).toBeTruthy(); // These epoch times are 24h apart
-    expect(moment.utc("1424196910165").isSame(moment.utc(1424196910165))).toBeFalsy(); // But we would like to support for string epoch dates anyway!
     expect(moment.utc(1424196910165).isSame(moment.utc(1424196910165))).toBeTruthy(); // Along with ISO sting, NOT deprecated...
+    expect(moment.utc("1424196910165").isSame(moment.utc(1424196910165))).toBeFalsy(); // Irritating we can't specify moment as integer string!
+    expect(JSON.stringify(moment.utc("2000-02-01T01:00:00.000Z"))).toEqual(JSON.stringify("2000-02-01T01:00:00.000Z")); // moment.toJSON() uses ISO
+    expect(JSON.stringify(moment.utc(1424196910165))).toEqual(JSON.stringify("2015-02-17T18:15:10.165Z")); // moment.toJSON() uses ISO
     expect(JSON.stringify(moment.duration(5, 'm'))).toEqual(JSON.stringify("PT5M")); // moment.duration.toJSON() only works with moment.js 2.9.0+
     expect(JSON.stringify(moment.utc(moment.utc("1424196910165")))).toEqual(JSON.stringify(moment.utc("1424196910165"))); // are moments idempotent
     expect(JSON.stringify(moment.duration(moment.duration(3, "days")))).toEqual(JSON.stringify(moment.duration(3, "days"))); // are durations idempotent
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
