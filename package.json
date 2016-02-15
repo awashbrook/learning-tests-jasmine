@@ -9,6 +9,6 @@
     "jshint": "^2.6.0"
   },
   "scripts": {
-    "test": "jshint src spec && ./node_modules/jasmine/bin/jasmine.js"
+    "test": "./node_modules/.bin/jshint src spec && ./node_modules/jasmine/bin/jasmine.js"
   }
 }
