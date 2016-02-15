@@ -14,6 +14,5 @@ describe("tests to learn lodash.js", function () {
     expect(objects[1]).toBe(objects[0]);
     var deep = _.cloneDeep(objects);
     expect(deep[1]).toBe(deep[0]); // Can surprise, behaviour identical for angular.copy();
-
   });
 });
