@@ -2,7 +2,7 @@
 var _ = require('lodash');
 
 describe("tests to learn jasmine, javascript, em6, lodash", function () {
-  // TODO upgrade Jasmine 1.3.1 > 2.1.3 and integrate custom matcher properly
+  // TODO we have now upgraded Jasmine 1.3.1 > 2.1.3 so integrate custom matcher properly
   //beforeEach(function () {
   //  jasmine.addMatchers({
   //    toDeepEqual: function (expected) {
