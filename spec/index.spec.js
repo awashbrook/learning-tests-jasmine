@@ -2,22 +2,6 @@
 var _ = require('lodash');
 
 describe("tests to learn jasmine, javascript, em6, lodash", function () {
-  // TODO upgrade Jasmine 1.3.1 > 2.1.3 and integrate custom matcher properly
-  //beforeEach(function () {
-  //  jasmine.addMatchers({
-  //    toDeepEqual: function (expected) {
-  //      return _.isEqual(this.actual, expected);
-  //    }
-  //  });
-  //});
-  it('should log jasmine version', function () {
-    if (jasmine.version) { //the case for version 2.0.0
-      console.log('jasmine-version:' + jasmine.version);
-    }
-    else { //the case for version 1.3
-      console.log('jasmine-version:' + jasmine.getEnv().versionString());
-    }
-  });
   it("should cover sample tests for Object.is", function () {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
     expect(Object.is('foo', 'foo')).toBeTruthy();     // true
@@ -55,12 +39,12 @@ describe("tests to learn jasmine, javascript, em6, lodash", function () {
       to: 'now',
       from: 'then'
     })).toBeTruthy();
-    //expect(({
-    //  from: 'then',
-    //  to: 'now'
-    //})).toDeepEqual({
-    //  to: 'now',
-    //  from: 'then'
-    //});
+    expect(({
+      from: 'then',
+      to: 'now'
+    })).toDeepEqual({
+      to: 'now',
+      from: 'then'
+    });
   });
 });
