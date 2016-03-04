@@ -15,4 +15,9 @@ describe("tests to learn lodash.js", function () {
     var deep = _.cloneDeep(objects);
     expect(deep[1]).toBe(deep[0]); // Can surprise, behaviour identical for angular.copy();
   });
+  it("shows lodash 4 supports only map and not pluck anymore", function () {
+    var objects = [ { 'a': 1 }, { 'a': 2 } ];
+    expect(_.pluck).toBeUndefined(); // removed in lodash 3
+    expect(_.map(objects, 'a')).toEqual( [1, 2]); // lodash 4
+  });
 });
