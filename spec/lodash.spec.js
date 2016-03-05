@@ -18,7 +18,33 @@ describe("tests to learn lodash.js", function () {
     var deep = _.cloneDeep(objects);
     expect(deep[1]).toBe(deep[0]); // Can surprise, behaviour identical for angular.copy();
   });
-  fdescribe("compare _.sortBy function semantics are not like Array.sort with tuple args", function () {
+  describe("show various Array methods", function () {
+    var scores, things, ages, vegetables;
+    beforeEach(function () {
+      scores = [1, 10, 2, 21];
+      things = ['word', 'Word', '1 Word', '2 Words'];
+      ages = [ { 'age': 1 }, { 'age': 10 }, { 'age': 2 }, { 'age': 21 } ];
+      vegetables = ['parsnip', 'potato'];
+    });
+    it("cloning an existing array using concat, the empty array is discarded", function () {
+      var newthings = [].concat(things);
+      expect(newthings).toEqual(things);
+      expect(newthings).not.toBe(things);
+    });
+    describe("merging two arrays using push", function () {
+//    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push#Merging_two_arrays
+      it("allows you to push individual elements", function () {
+        expect(vegetables.push('celery', 'beetroot')).toEqual(4);
+        expect(vegetables).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
+      });
+      it("is possible to merge a second array in using apply", function () {
+        var moreVegs = ['celery', 'beetroot'];
+        Array.prototype.push.apply(vegetables, moreVegs);
+        expect(vegetables).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
+      });
+    });
+  });
+  describe("compare lodash _.sortBy function semantics are not like Array.sort with tuple args", function () {
     var fruit, sortedFruit, sortedValues, scores, stringyScores, things, ages, stringyAges;
     beforeEach(function () {
       fruit = ['cherries', 'apples', 'bananas'];
