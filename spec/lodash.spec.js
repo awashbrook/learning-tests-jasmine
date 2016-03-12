@@ -19,28 +19,34 @@ describe("tests to learn lodash.js", function () {
     expect(deep[1]).toBe(deep[0]); // Can surprise, behaviour identical for angular.copy();
   });
   describe("show various Array methods", function () {
-    var scores, things, ages, vegetables;
+    var scores, things, ages, veggies, moreVeggies;
     beforeEach(function () {
       scores = [1, 10, 2, 21];
       things = ['word', 'Word', '1 Word', '2 Words'];
       ages = [ { 'age': 1 }, { 'age': 10 }, { 'age': 2 }, { 'age': 21 } ];
-      vegetables = ['parsnip', 'potato'];
+      veggies = ['parsnip', 'potato'];
+      moreVeggies = ['celery', 'beetroot'];
     });
     it("cloning an existing array using concat, the empty array is discarded", function () {
       var newthings = [].concat(things);
       expect(newthings).toEqual(things);
       expect(newthings).not.toBe(things);
     });
+    it("three arrays are involved with concat", function () {
+      var allVeggies = veggies.concat(moreVeggies);
+      expect(allVeggies).not.toBe(veggies);
+      expect(allVeggies).not.toBe(moreVeggies);
+      expect(allVeggies).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
+    });
     describe("merging two arrays using push", function () {
 //    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push#Merging_two_arrays
       it("allows you to push individual elements", function () {
-        expect(vegetables.push('celery', 'beetroot')).toEqual(4);
-        expect(vegetables).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
+        expect(veggies.push('celery', 'beetroot')).toEqual(4);
+        expect(veggies).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
       });
       it("is possible to merge a second array in using apply", function () {
-        var moreVegs = ['celery', 'beetroot'];
-        Array.prototype.push.apply(vegetables, moreVegs);
-        expect(vegetables).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
+        Array.prototype.push.apply(veggies, moreVeggies);
+        expect(veggies, moreVeggies).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
       });
     });
   });
