@@ -28,7 +28,7 @@ describe("tests to learn lodash.js", function () {
       moreVeggies = ['celery', 'beetroot'];
     });
     it("cloning an existing array using concat, the empty array is discarded", function () {
-      var newthings = [].concat(things);
+      var newthings = [].concat(things); // traditional way of cloning arrays in javascript
       expect(newthings).toEqual(things);
       expect(newthings).not.toBe(things);
     });
@@ -48,6 +48,10 @@ describe("tests to learn lodash.js", function () {
         Array.prototype.push.apply(veggies, moreVeggies);
         expect(veggies, moreVeggies).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
       });
+    });
+    it("tokenizes messy comma separated string", function () {
+      var tokenizedWords = 'word, word    ,word   ,  word'.split(' ').join('').split(',');
+      expect(tokenizedWords).toEqual(['word', 'word', 'word', 'word']);
     });
   });
   describe("compare lodash _.sortBy function semantics are not like Array.sort with tuple args", function () {
