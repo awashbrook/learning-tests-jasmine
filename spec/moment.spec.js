@@ -83,6 +83,20 @@ describe("tests to learn moment.js", function () {
 
     expect(moment.utc(1424283310165).add(moment.duration(-1, "days")).isSame(moment.utc(1424196910165))).toBeTruthy(); // These epoch times are 24h apart
   });
+  it("moment duration behaviour for weeks", function () {
+    var duration = moment.duration(8, "days");
+    var weeksInMonth = duration.weeks(); // http://momentjs.com/docs/#/durations/weeks/ max 4 in month!
+    expect(weeksInMonth).toEqual(jasmine.any(Number));
+    expect(weeksInMonth % 1).toEqual(0); // integer
+    expect(weeksInMonth).toEqual(1);
+
+    var fractionalWeeks = duration.asWeeks();
+    expect(fractionalWeeks).toEqual(jasmine.any(Number));
+    expect(fractionalWeeks % 1).not.toEqual(0); // floating
+
+    var roundedWeeks = Math.floor( fractionalWeeks );
+    expect(duration.subtract(roundedWeeks, 'weeks').asDays()).toEqual(1);
+  });
 });
 
 
