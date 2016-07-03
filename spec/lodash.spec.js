@@ -44,10 +44,61 @@ describe("tests to learn lodash.js", function () {
         expect(veggies.push('celery', 'beetroot')).toEqual(4);
         expect(veggies).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
       });
-      it("is possible to merge a second array in using apply", function () {
+      it("is possible to concatenate a second array in using apply", function () {
         Array.prototype.push.apply(veggies, moreVeggies);
         expect(veggies, moreVeggies).toEqual(['parsnip', 'potato', 'celery', 'beetroot']);
       });
+    });
+    it("tokenizes messy comma separated string", function () {
+      var tokenizedWords = 'word, word    ,word   ,  word'.split(' ').join('').split(',');
+      expect(tokenizedWords).toEqual(['word', 'word', 'word', 'word']);
+    });
+  });
+  describe("show various ways of handling arrays when merging objects", function () {
+    var object, other, mergedArrays;
+    beforeEach(function () {
+      mergedArrays = [];
+      object = {
+        'fruits': ['apple'],
+        'vegetables': ['beet']
+      };
+      other = {
+        'fruits': ['banana'],
+        'vegetables': ['carrot']
+      };
+    });
+    it("merges arrays exactly like it merge objects, because arrays are objects with numeric keys.", function () {
+      //http://stackoverflow.com/a/33247597
+      _.merge(mergedArrays, ['a'], ['bb']);
+      expect(mergedArrays).toEqual(['bb']);
+    });
+    it("is rarely the best behaviour for any serious object model.", function () {
+      _.merge(mergedArrays, ['a', 'b'], ['bb']);
+      expect(mergedArrays).toEqual([ 'bb', 'b' ]);
+    });
+    it("one would expect to concatenate using customizer callback...", function () {
+      _.mergeWith(object, other, function(a, b) { // https://lodash.com/docs#mergeWith
+        if (_.isArray(a)) {
+          return a.concat(b);
+        }
+      });
+      expect(object).toEqual({
+          'fruits': ['apple', 'banana'],
+          'vegetables': ['beet', 'carrot']
+        }
+      );
+    });
+    it("or replace arrays, depends on usage.", function () {
+      _.mergeWith(object, other, function(a, b) { 
+        if (_.isArray(a)) {
+          return b;
+        }
+      });
+      expect(object).toEqual({
+          'fruits': ['banana'],
+          'vegetables': ['carrot']
+        }
+      );
     });
     it("tokenizes messy comma separated string", function () {
       var tokenizedWords = 'word, word    ,word   ,  word'.split(' ').join('').split(',');
