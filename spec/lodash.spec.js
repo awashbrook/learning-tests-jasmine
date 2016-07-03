@@ -76,7 +76,27 @@ describe("tests to learn lodash.js", function () {
       _.merge(mergedArrays, ['a', 'b'], ['bb']);
       expect(mergedArrays).toEqual([ 'bb', 'b' ]);
     });
-    it("one would expect to concatenate using customizer callback...", function () {
+    it("is rarely the best behaviour for any serious object model again.", function () {
+      _.merge(object, other);
+      expect(object).toEqual({
+          'fruits': ['banana'],
+          'vegetables': ['carrot']
+        }
+      );
+    });
+    it("or replace arrays, depends on usage.", function () {
+      _.mergeWith(object, other, function(a, b) {
+        if (_.isArray(a)) {
+          return b;
+        }
+      });
+      expect(object).toEqual({
+          'fruits': ['banana'],
+          'vegetables': ['carrot']
+        }
+      );
+    });
+    it("or one would expect to concatenate using customizer callback...", function () {
       _.mergeWith(object, other, function(a, b) { // https://lodash.com/docs#mergeWith
         if (_.isArray(a)) {
           return a.concat(b);
@@ -85,18 +105,6 @@ describe("tests to learn lodash.js", function () {
       expect(object).toEqual({
           'fruits': ['apple', 'banana'],
           'vegetables': ['beet', 'carrot']
-        }
-      );
-    });
-    it("or replace arrays, depends on usage.", function () {
-      _.mergeWith(object, other, function(a, b) { 
-        if (_.isArray(a)) {
-          return b;
-        }
-      });
-      expect(object).toEqual({
-          'fruits': ['banana'],
-          'vegetables': ['carrot']
         }
       );
     });
