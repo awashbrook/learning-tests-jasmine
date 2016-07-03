@@ -56,35 +56,35 @@ describe("tests to learn lodash.js", function () {
   });
   describe("show various ways of handling arrays when merging objects", function () {
     var object, other, mergedArrays;
-    beforeEach(function () {
-      mergedArrays = [];
-      object = {
-        'fruits': ['apple'],
-        'vegetables': ['beet']
-      };
-      other = {
-        'fruits': ['banana'],
-        'vegetables': ['carrot']
-      };
-    });
-    it("merges arrays exactly like it merge objects, because arrays are objects with numeric keys.", function () {
+    it("merges arrays exactly like it merge objects...", function () {
       //http://stackoverflow.com/a/33247597
       _.merge(mergedArrays, ['a'], ['bb']);
       expect(mergedArrays).toEqual(['bb']);
     });
-    it("is rarely the best behaviour for any serious object model.", function () {
+    it("because arrays are objects with numeric keys.", function () {
       _.merge(mergedArrays, ['a', 'b'], ['bb']);
       expect(mergedArrays).toEqual([ 'bb', 'b' ]);
     });
-    it("is rarely the best behaviour for any serious object model again.", function () {
+    beforeEach(function () {
+      mergedArrays = [];
+      object = {
+        'fruits': ['apple', 'pear'],
+        'vegetables': ['beet']
+      };
+      other = {
+        'fruits': ['banana'],
+        'vegetables': ['carrot', 'pea']
+      };
+    });
+    it("is rarely the best behaviour for any serious object model!", function () {
       _.merge(object, other);
       expect(object).toEqual({
-          'fruits': ['banana'],
-          'vegetables': ['carrot']
+          'fruits': ['banana', 'pear'], // probably not what you wanted..!
+          'vegetables': ['carrot', 'pea']
         }
       );
     });
-    it("or replace arrays, depends on usage.", function () {
+    it("is often better to replace arrays using customizer callback...", function () {
       _.mergeWith(object, other, function(a, b) {
         if (_.isArray(a)) {
           return b;
@@ -92,25 +92,21 @@ describe("tests to learn lodash.js", function () {
       });
       expect(object).toEqual({
           'fruits': ['banana'],
-          'vegetables': ['carrot']
+          'vegetables': ['carrot', 'pea']
         }
       );
     });
-    it("or one would expect to concatenate using customizer callback...", function () {
+    it("or concatenate together a superset.", function () {
       _.mergeWith(object, other, function(a, b) { // https://lodash.com/docs#mergeWith
         if (_.isArray(a)) {
           return a.concat(b);
         }
       });
       expect(object).toEqual({
-          'fruits': ['apple', 'banana'],
-          'vegetables': ['beet', 'carrot']
+          'fruits': ['apple', 'pear', 'banana'],
+          'vegetables': ['beet', 'carrot' ,'pea']
         }
       );
-    });
-    it("tokenizes messy comma separated string", function () {
-      var tokenizedWords = 'word, word    ,word   ,  word'.split(' ').join('').split(',');
-      expect(tokenizedWords).toEqual(['word', 'word', 'word', 'word']);
     });
   });
   describe("compare lodash _.sortBy function semantics are not like Array.sort with tuple args", function () {
